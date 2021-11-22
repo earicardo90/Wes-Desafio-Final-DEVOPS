@@ -97,7 +97,7 @@ output "output-k8s_workers" {
 output "output-k8s_proxy" {
   value = [
     for key, item in aws_instance.k8s_proxy :
-    "k8s_proxy ${key+1} - ${item.public_ip} - ssh -i ~/.ssh/weslley_itau_rsa -o ServerAliveInterval=60 -o StrictHostKeyChecking=no ubuntu@${item.public_ip} "
+      "k8s-proxy ${key+1} - ${item.public_ip} - ssh -i ~/.ssh/weslley_itau_rsa -o ServerAliveInterval=60 -o StrictHostKeyChecking=no ubuntu@${item.public_ip} "
   ]
 }
 
