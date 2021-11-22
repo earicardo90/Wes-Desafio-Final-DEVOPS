@@ -23,13 +23,13 @@ resource "aws_instance" "k8s_masters" {
   ami           = var.image_id
   instance_type = "t2.large"
   key_name      = "weslley_key"
+  count         = 3
   subnet_id = element(var.subnet_ids, count.index)
   associate_public_ip_address = true  
   # root_block_device {
   #   encrypted   = true
   #   volume_size = 10
-  # }  
-  count         = 3
+  # }    
   tags = {
     Name = "wes-k8s-master-${count.index}"
   }
@@ -41,15 +41,15 @@ resource "aws_instance" "k8s_masters" {
 
 resource "aws_instance" "k8s_workers" {
   ami           = var.image_id
-  instance_type = "t2.large"
+  instance_type = "t2.medium"
   key_name      = "weslley_key"
+  count         = 3
   subnet_id = element(var.subnet_ids, count.index)
   associate_public_ip_address = true
   # root_block_device {
   #   encrypted   = true
   #   volume_size = 15
-  # }  
-  count         = 3
+  # }
   tags = {
     Name = "wes-k8s_workers-${count.index}"
   }
