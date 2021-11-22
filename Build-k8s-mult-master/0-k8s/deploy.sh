@@ -18,7 +18,7 @@ SG_IG_W=$(terraform output | grep security-group-workers-e-haproxy | awk '{print
 
 echo $SG_IG_W
 
-cat <<EOF > security_group_master.tf
+echo "
 resource "aws_security_group" "acessos_master" {
   name        = "wes-k8s-acessos_master"
   description = "acessos inbound traffic"
@@ -94,10 +94,7 @@ resource "aws_security_group" "acessos_master" {
     Name = "allow_ssh"
   }
 }
-EOF
-
-cd ../../0-terraform
-mv ../security_group_master.tf .
+" > security_group_master.tf
 terraform apply -auto-approve
 
 ID_M1=$(terraform output | grep 'k8s-master 1 -' | awk '{print $4;exit}')
@@ -266,9 +263,7 @@ cat <<EOF > 2-provisionar-k8s-master-auto-shell.yml
         msg: " '{{ ps.stdout_lines }}' "
 EOF
 
-echo $ID_M1_DNS
-
-cat <<EOF > teste.sh
+echo "
 #!/bin/bash
 ssh -i ~/.ssh/weslley_itau_rsa -o ServerAliveInterval=60 StrictHostKeyChecking=no ubuntu@$ID_M1_DNS sudo kubectl get nodes -o wide
-EOF
+" > ../../teste.sh
