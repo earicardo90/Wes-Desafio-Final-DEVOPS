@@ -12,7 +12,7 @@ terraform init
 terraform apply -auto-approve
 
 echo  "Aguardando a criação das maquinas ..."
-sleep 60
+sleep 10
 
 ID_M1=$(terraform output | grep 'k8s-master 1 -' | awk '{print $4;exit}')
 ID_M1_DNS=$(terraform output | grep 'k8s-master 1 -' | awk '{print $9;exit}' | cut -b 8-)
@@ -184,7 +184,7 @@ SG_IG_W=$(terraform output | grep security-group-workers-e-haproxy | awk '{print
 
 echo $SG_IG_W
 
-cat <<EOF > security_group_master.tf
+cat <<EOF > 0-terraform/security_group_master.tf
 resource "aws_security_group" "acessos_master" {
   name        = "wes-k8s-acessos_master"
   description = "acessos inbound traffic"
