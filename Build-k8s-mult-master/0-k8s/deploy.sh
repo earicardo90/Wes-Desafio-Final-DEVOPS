@@ -120,7 +120,7 @@ ID_W3_DNS=$(terraform output | grep 'k8s-workers 3 -' | awk '{print $9;exit}' | 
 
 echo "
 [ec2-k8s-proxy]
-$ID_HAPROXY_DNS
+$ID_HAPROXY
 
 [ec2-k8s-m1]
 $ID_M1
@@ -263,5 +263,5 @@ EOF
 
 echo "
 #!/bin/bash
-ssh -i ~/.ssh/weslley_itau_rsa -o ServerAliveInterval=60 StrictHostKeyChecking=no ubuntu@$ID_M1_DNS sudo kubectl get nodes -o wide
+ssh -i ~/.ssh/weslley_itau_rsa -o ServerAliveInterval=60 -o StrictHostKeyChecking=no ubuntu@$ID_M1_DNS sudo kubectl get nodes -o wide
 " > ../../teste.sh
