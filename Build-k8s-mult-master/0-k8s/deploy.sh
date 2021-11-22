@@ -184,7 +184,7 @@ SG_IG_W=$(terraform output | grep security-group-workers-e-haproxy | awk '{print
 
 echo $SG_IG_W
 
-cat <<EOF > 0-terraform/security_group_master.tf
+cat <<EOF > security_group_master.tf
 resource "aws_security_group" "acessos_master" {
   name        = "wes-k8s-acessos_master"
   description = "acessos inbound traffic"
@@ -263,4 +263,12 @@ resource "aws_security_group" "acessos_master" {
 EOF
 
 cd ../../0-terraform
+mv ../security_group_master.tf .
 terraform apply -auto-approve
+
+echo $ID_M1_DNS
+
+cat <<EOF > teste.sh
+#!/bin/bash
+ssh -i ~/.ssh/weslley_itau_rsa -o ServerAliveInterval=60 StrictHostKeyChecking=no ubuntu@$ID_M1_DNS sudo kubectl get nodes -o wide
+EOF

@@ -17,5 +17,10 @@ pipeline {
                 sh "Build-k8s-mult-master/0-k8s/provisiona_k8s-master.sh"
             }
         }
+        stage('Testa a configuração do Kubernetes e valida os hosts') {
+            steps {
+                sh "Build-k8s-mult-master/0-k8s/teste.sh"
+            }
+        }
     }
 }
