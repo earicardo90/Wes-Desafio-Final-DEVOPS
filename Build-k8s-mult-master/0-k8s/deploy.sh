@@ -18,8 +18,7 @@ SG_IG_W=$(terraform output | grep security-group-workers-e-haproxy | awk '{print
 
 echo $SG_IG_W
 
-echo "
-resource "aws_security_group" "acessos_master" {
+echo "resource "aws_security_group" "acessos_master" {
   name        = "wes-k8s-acessos_master"
   description = "acessos inbound traffic"
   vpc_id = "vpc-0050d085a3350c2c9"
@@ -54,10 +53,7 @@ resource "aws_security_group" "acessos_master" {
        ipv6_cidr_blocks = []
        prefix_list_ids  = []
        protocol         = "-1"
-       security_groups  = [
-         "$SG_IG_W"
-         //aws_security_group.acessos_master.id - para criar pela primeira vez é necessário comentar este bloco
-       ]
+       security_groups  = ["$SG_IG_W"]
        self             = false
        to_port          = 0
      },
