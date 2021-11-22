@@ -18,7 +18,8 @@ SG_IG_W=$(terraform output | grep security-group-workers-e-haproxy | awk '{print
 
 echo $SG_IG_W
 
-echo "resource "aws_security_group" "acessos_master" {
+cat <<EOF > security_group_master.tf
+resource "aws_security_group" "acessos_master" {
   name        = "wes-k8s-acessos_master"
   description = "acessos inbound traffic"
   vpc_id = "vpc-0050d085a3350c2c9"
@@ -90,7 +91,8 @@ echo "resource "aws_security_group" "acessos_master" {
     Name = "allow_ssh"
   }
 }
-" > security_group_master.tf
+EOF
+
 terraform apply -auto-approve
 
 ID_M1=$(terraform output | grep 'k8s-master 1 -' | awk '{print $4;exit}')
