@@ -16,4 +16,4 @@ variable "image_id" {
   type = string
   default = "$AMI_ID"
 }
-" > ../../Build-k8s-mult-master/0-k8s/0-terraform/var_ami.tf
+" > ../../Build-k8s-mult-master/Build-k8s-mult-master/0-k8s/0-terraform/var_ami.tf
