@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Clone repo') {
             steps {
-                git url: 'git@github.com:weslleyfs/Wes-Desafio-Final-DEVOPS.git', branch: 'main'
+                git url: 'https://github.com/weslleyfs/Wes-Desafio-Final-DEVOPS.git', branch: 'main'
             }
         }
         stage('Deploy Infra - Mysql priv') {
