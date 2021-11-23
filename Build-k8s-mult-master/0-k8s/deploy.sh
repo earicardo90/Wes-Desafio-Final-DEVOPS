@@ -267,8 +267,8 @@ echo $SG_IG_M
 
 echo "
 #!/bin/bash
-cd Build-k8s-mult-master/Build-k8s-mult-master/0-k8s/0-terraform
-aws ec2 revoke-security-group-ingress --group-id $SG_IG_M --protocol -1 --port 0 --source-group $SG_IG_W
+cd Build-k8s-mult-master/0-k8s/0-terraform
+aws ec2 revoke-security-group-ingress --group-id $SG_IG_M --protocol -1 --port 0 --source-group $SG_IG_W --region sa-east-1
 terraform destroy -auto-approve
 " > ../../destroy.sh
 
