@@ -276,7 +276,7 @@ echo "
 #!/bin/bash
 ssh -i ~/.ssh/weslley_itau_rsa -o ServerAliveInterval=60 -o StrictHostKeyChecking=no ubuntu@$ID_M1_DNS sudo kubectl get nodes -o wide
 
-cd 0-terraform
+cd Build-k8s-mult-master/0-k8s/0-terraform
 SUB_PRIV_0=$(terraform output | grep subnet_priv_0 | awk '{print $3}' | sed -e "s/\"//g")
 SUB_PRIV_1=$(terraform output | grep subnet_priv_1 | awk '{print $3}' | sed -e "s/\"//g")
 SUB_PRIV_2=$(terraform output | grep subnet_priv_2 | awk '{print $3}' | sed -e "s/\"//g")
