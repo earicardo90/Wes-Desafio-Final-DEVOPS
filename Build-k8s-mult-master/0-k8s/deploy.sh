@@ -95,7 +95,7 @@ resource "aws_security_group" "acessos_master" {
 }
 EOF
 
-terraform apply -auto-approve
+TF_VAR_resource_id=$image_id terraform apply -auto-approve
 
 ID_M1=$(terraform output | grep 'k8s-master 1 -' | awk '{print $4;exit}')
 ID_M1_DNS=$(terraform output | grep 'k8s-master 1 -' | awk '{print $13;exit}' | cut -b 8-)
