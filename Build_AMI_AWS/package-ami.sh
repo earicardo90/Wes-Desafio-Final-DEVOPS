@@ -11,9 +11,10 @@ TF_VAR_versao=$VERSAO TF_VAR_resource_id=$RESOURCE_ID terraform apply -auto-appr
 
 AMI_ID=$(terraform output | grep AMI | awk '{print $2}' | sed -e "s/\",//g")
 
-echo "
-variable "image_id" {
-  type = string
-  default = "$AMI_ID"
-}
-" > ../../Build-k8s-mult-master/Build-k8s-mult-master/0-k8s/0-terraform/var_ami.tf
+echo $AMI_ID
+# echo "
+# variable "image_id" {
+#   type = string
+#   default = "$AMI_ID"
+# }
+# " > ../../Build-k8s-mult-master/Build-k8s-mult-master/0-k8s/0-terraform/var_ami.tf

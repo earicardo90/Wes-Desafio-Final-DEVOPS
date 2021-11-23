@@ -1,6 +1,9 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'image_id', defaultValue: '', description: 'Digite o ID da AMI que será utilizad para o deploy')
+    } 
     stages {
         stage('Clone repo') {
             steps {
@@ -22,10 +25,7 @@ pipeline {
                 sh "Build-k8s-mult-master/0-k8s/teste.sh"
             }
         }
-        stage('Destroi a infra criada') {
-            steps {
-                sh "Build-k8s-mult-master/0-k8s/destroy.sh"
-            }
-        }
+
+        
     }
 }

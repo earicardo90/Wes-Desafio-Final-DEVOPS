@@ -9,7 +9,7 @@
 
 cd Build-k8s-mult-master/0-k8s/0-terraform
 terraform init
-terraform apply -auto-approve
+TF_VAR_resource_id=$image_id terraform apply -auto-approve
 
 echo  "Aguardando a criação das maquinas ..."
 sleep 10
