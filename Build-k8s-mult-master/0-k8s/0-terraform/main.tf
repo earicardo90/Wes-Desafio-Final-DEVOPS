@@ -105,6 +105,9 @@ output "security-group-workers-e-haproxy" {
   value = aws_security_group.acessos_workers.id
 }
 
+output "security-group-master" {
+  value = aws_security_group.acessos_master.id
+}
 
 
 # terraform refresh para mostrar o ssh

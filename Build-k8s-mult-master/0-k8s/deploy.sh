@@ -14,7 +14,9 @@ terraform apply -auto-approve
 echo  "Aguardando a criação das maquinas ..."
 sleep 10
 
+SG_IG_M=$(terraform output | grep security-group-master | awk '{print $3}' | sed -e "s/\"//g")
 SG_IG_W=$(terraform output | grep security-group-workers-e-haproxy | awk '{print $3}' | sed -e "s/\"//g")
+
 
 echo $SG_IG_W
 
@@ -261,8 +263,18 @@ cat <<EOF > 2-provisionar-k8s-master-auto-shell.yml
         msg: " '{{ ps.stdout_lines }}' "
 EOF
 
+echo $SG_IG_M
+
+echo "
+#!/bin/bash
+cd Build-k8s-mult-master/Build-k8s-mult-master/0-k8s/0-terraform
+aws ec2 revoke-security-group-ingress --group-id $SG_IG_M --protocol -1 --port 0 --source-group $SG_IG_W
+terraform destroy -auto-approve
+" > ../../destroy.sh
+
 echo "
 #!/bin/bash
 ssh -i ~/.ssh/weslley_itau_rsa -o ServerAliveInterval=60 -o StrictHostKeyChecking=no ubuntu@$ID_M1_DNS sudo kubectl get nodes -o wide
 " > ../../teste.sh
 chmod +x ../../teste.sh
+chmod +x ../../destroy.sh
