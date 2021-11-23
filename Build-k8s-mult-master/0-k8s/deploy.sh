@@ -96,27 +96,27 @@ EOF
 terraform apply -auto-approve
 
 ID_M1=$(terraform output | grep 'k8s-master 1 -' | awk '{print $4;exit}')
-ID_M1_DNS=$(terraform output | grep 'k8s-master 1 -' | awk '{print $9;exit}' | cut -b 8-)
+ID_M1_DNS=$(terraform output | grep 'k8s-master 1 -' | awk '{print $13;exit}' | cut -b 8-)
 
 ID_M2=$(terraform output | grep 'k8s-master 2 -' | awk '{print $4;exit}')
-ID_M2_DNS=$(terraform output | grep 'k8s-master 2 -' | awk '{print $9;exit}' | cut -b 8-)
+ID_M2_DNS=$(terraform output | grep 'k8s-master 2 -' | awk '{print $13;exit}' | cut -b 8-)
 
 ID_M3=$(terraform output | grep 'k8s-master 3 -' | awk '{print $4;exit}')
-ID_M3_DNS=$(terraform output | grep 'k8s-master 3 -' | awk '{print $9;exit}' | cut -b 8-)
+ID_M3_DNS=$(terraform output | grep 'k8s-master 3 -' | awk '{print $13;exit}' | cut -b 8-)
 
 
 ID_HAPROXY=$(terraform output | grep 'k8s-proxy 1' | awk '{print $4;exit}')
-ID_HAPROXY_DNS=$(terraform output | grep 'k8s-proxy 1' | awk '{print $8;exit}' | cut -b 8-)
+ID_HAPROXY_DNS=$(terraform output | grep 'k8s-proxy 1' | awk '{print $13;exit}' | cut -b 8-)
 
 
 ID_W1=$(terraform output | grep 'k8s-workers 1 -' | awk '{print $4;exit}')
-ID_W1_DNS=$(terraform output | grep 'k8s-workers 1 -' | awk '{print $9;exit}' | cut -b 8-)
+ID_W1_DNS=$(terraform output | grep 'k8s-workers 1 -' | awk '{print $13;exit}' | cut -b 8-)
 
 ID_W2=$(terraform output | grep 'k8s-workers 2 -' | awk '{print $4;exit}')
-ID_W2_DNS=$(terraform output | grep 'k8s-workers 2 -' | awk '{print $9;exit}' | cut -b 8-)
+ID_W2_DNS=$(terraform output | grep 'k8s-workers 2 -' | awk '{print $13;exit}' | cut -b 8-)
 
 ID_W3=$(terraform output | grep 'k8s-workers 3 -' | awk '{print $4;exit}')
-ID_W3_DNS=$(terraform output | grep 'k8s-workers 3 -' | awk '{print $9;exit}' | cut -b 8-)
+ID_W3_DNS=$(terraform output | grep 'k8s-workers 3 -' | awk '{print $13;exit}' | cut -b 8-)
 
 echo "
 [ec2-k8s-proxy]
@@ -265,3 +265,4 @@ echo "
 #!/bin/bash
 ssh -i ~/.ssh/weslley_itau_rsa -o ServerAliveInterval=60 -o StrictHostKeyChecking=no ubuntu@$ID_M1_DNS sudo kubectl get nodes -o wide
 " > ../../teste.sh
+chmod +x ../../teste.sh
