@@ -278,3 +278,17 @@ ssh -i ~/.ssh/weslley_itau_rsa -o ServerAliveInterval=60 -o StrictHostKeyCheckin
 " > ../../teste.sh
 chmod +x ../../teste.sh
 chmod +x ../../destroy.sh
+
+SUB_PRIV_0=$(terraform output | grep subnet_priv_0 | awk '{print $3}' | sed -e "s/\"//g")
+SUB_PRIV_1=$(terraform output | grep subnet_priv_1 | awk '{print $3}' | sed -e "s/\"//g")
+SUB_PRIV_2=$(terraform output | grep subnet_priv_2 | awk '{print $3}' | sed -e "s/\"//g")
+
+echo $SUB_PRIV_0
+echo $SUB_PRIV_1
+echo $SUB_PRIV_2
+
+echo "
+ variable "subnet_priv_ids" {
+   type    = list(string)
+   default = ["$SUB_PRIV_0", "$SUB_PRIV_1", "$SUB_PRIV_2"]
+ }" > ../../../../Create-EC2_mysql/terraform/subnet.tf
