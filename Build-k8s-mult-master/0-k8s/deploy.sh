@@ -9,7 +9,7 @@
 
 cd Build-k8s-mult-master/0-k8s/0-terraform
 terraform init
-TF_VAR_resource_id=$image_id terraform apply -auto-approve
+TF_VAR_image_id=$image_id terraform apply -auto-approve
 
 echo  "Aguardando a criação das maquinas ..."
 sleep 10
@@ -95,7 +95,7 @@ resource "aws_security_group" "acessos_master" {
 }
 EOF
 
-TF_VAR_resource_id=$image_id terraform apply -auto-approve
+TF_VAR_image_id=$image_id terraform apply -auto-approve
 
 ID_M1=$(terraform output | grep 'k8s-master 1 -' | awk '{print $4;exit}')
 ID_M1_DNS=$(terraform output | grep 'k8s-master 1 -' | awk '{print $13;exit}' | cut -b 8-)
