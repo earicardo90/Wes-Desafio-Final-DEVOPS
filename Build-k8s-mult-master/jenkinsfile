@@ -25,7 +25,6 @@ pipeline {
                 sh "Build-k8s-mult-master/0-k8s/teste.sh"
             }
         }
-
         
     }
 }
