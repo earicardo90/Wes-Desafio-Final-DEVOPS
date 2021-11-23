@@ -19,7 +19,7 @@ pipeline {
                 sh "Create-EC2_mysql/deploy.sh"
             }
         }
-        stage('Configura e faz Join dos masters e workers') {
+        stage('Configura o mysql') {
             steps {
                 sh "Create-EC2_mysql/configura_mysql.sh"
             }
