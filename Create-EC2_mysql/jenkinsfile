@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'image_id', defaultValue: '', description: 'Digite o ID da AMI que será utilizado para o deploy')
+        string(name: 'subnet_priv_1', defaultValue: '', description: 'Digite os ID da primeira subnet privada')
+        string(name: 'subnet_priv_2', defaultValue: '', description: 'Digite os ID da segunda subnet privada')
+        string(name: 'subnet_priv_3', defaultValue: '', description: 'Digite os ID da terceira subnet privada')
+    } 
+    stages {
+        stage('Clone repo') {
+            steps {
+                git url: 'git@github.com:weslleyfs/Wes-Desafio-Final-DEVOPS.git', branch: 'main'
+            }
+        }
+        
+    }
+}
