@@ -4,39 +4,38 @@ provider "aws" {
 
 resource "aws_instance" "k8s_proxy" {
   ami           = var.image_id
-  instance_type = "t2.micro"
+  instance_type = "t2.medium"
   key_name      = "weslley_key"
-  subnet_id     = element(var.subnet_ids, count.index)
+  subnet_id     = "${element(var.subnet_public_ids, count.index)}"
   associate_public_ip_address = true
-  # root_block_device {
-  #   encrypted   = true
-  #   volume_size = 8
-  # }
   count         = 1  
   tags = {
     Name = "wes-k8s-haproxy"
   }
   vpc_security_group_ids = [aws_security_group.acessos_workers.id]
+  # depends_on = [
+  #   aws_subnet.wes_sub_tf_public_a,aws_subnet.wes_sub_tf_public_c
+  # ]
 }
+
 
 resource "aws_instance" "k8s_masters" {
   ami           = var.image_id
   instance_type = "t2.large"
   key_name      = "weslley_key"
   count         = 3
-  subnet_id = element(var.subnet_ids, count.index)
-  associate_public_ip_address = true  
-  # root_block_device {
-  #   encrypted   = true
-  #   volume_size = 10
-  # }    
+  subnet_id = "${element(var.subnet_public_ids, count.index)}"
+  associate_public_ip_address = true    
   tags = {
     Name = "wes-k8s-master-${count.index}"
   }
   vpc_security_group_ids = [aws_security_group.acessos_master.id]
+  # depends_on = [
+  #   aws_subnet.wes_sub_tf_public_a,aws_subnet.wes_sub_tf_public_c,aws_instance.k8s_workers
+  # ]
   depends_on = [
-    aws_instance.k8s_workers,
-  ]
+    aws_instance.k8s_workers
+  ]  
 }
 
 resource "aws_instance" "k8s_workers" {
@@ -44,42 +43,17 @@ resource "aws_instance" "k8s_workers" {
   instance_type = "t2.medium"
   key_name      = "weslley_key"
   count         = 3
-  subnet_id = element(var.subnet_ids, count.index)
+  subnet_id = "${element(var.subnet_public_ids, count.index)}"
   associate_public_ip_address = true
-  # root_block_device {
-  #   encrypted   = true
-  #   volume_size = 15
-  # }
   tags = {
     Name = "wes-k8s_workers-${count.index}"
   }
   vpc_security_group_ids = [aws_security_group.acessos_workers.id]
+  #   depends_on = [
+  #   aws_subnet.wes_sub_tf_public_a,aws_subnet.wes_sub_tf_public_c
+  # ]
 }
 
-# resource "aws_eip" "wes_eip" {
-  
-# }
-# resource "aws_nat_gateway" "nat_gatway" {
-#   allocation_id = aws_eip.wes_eip.id
-#   subnet_id     = "subnet-0341d478f8cd667a3"
-
-#   tags = {
-#     Name = "Wes-gw-NAT"
-#   }
-
-# }
-# resource "aws_route_table" "nat_gateway" {
-#   vpc_id = "vpc-0050d085a3350c2c9"
-#   route {
-#     cidr_block = "0.0.0.0/0"
-#     gateway_id = "igw-054a2658906c6a922"
-#   }
-# }
-
-# resource "aws_route_table_association" "nat_gateway" {
-#   subnet_id = "subnet-0a7b85eab03329d31"
-#   route_table_id = aws_route_table.nat_gateway.id
-# }
 output "k8s-masters" {
   value = [
     for key, item in aws_instance.k8s_masters :
@@ -109,5 +83,18 @@ output "security-group-master" {
   value = aws_security_group.acessos_master.id
 }
 
+output "subnet_priv_a" {
+  value = aws_subnet.wes_sub_tf_priv_a.id
+}
 
-# terraform refresh para mostrar o ssh
+output "subnet_priv_c" {
+  value = aws_subnet.wes_sub_tf_priv_c.id
+}
+
+output "subnet_public_a" {
+  value = aws_subnet.wes_sub_tf_public_a.id
+}
+
+output "subnet_public_c" {
+  value = aws_subnet.wes_sub_tf_public_c.id
+}

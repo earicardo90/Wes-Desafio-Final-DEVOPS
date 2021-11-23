@@ -3,18 +3,24 @@ variable "ip_haproxy" {
   default = "187.3.223.136"
   description = "Passe aqui o IP do haproxy"
 }
-variable "subnet_priv" {
-    type = map(string)
-    default = { 
-        "a" = "subnet-0341d478f8cd667a3"
-        "b" = "subnet-066e5789ce7e65f06"
-        "c" = "subnet-0a7b85eab03329d31"
-        "priv" = "subnet-0cb1996a808f89e2f"
-        
-    }
+
+variable "subnet_public_ids" {
+  type    = list(string)
+  default = ["aws_subnet.wes_sub_tf_public_a.id,aws_subnet.wes_sub_tf_public_c.id"]
 }
 
-variable "subnet_ids" {
+variable "subnet_priv_ids" {
   type    = list(string)
-  default = ["subnet-0341d478f8cd667a3","subnet-0a7b85eab03329d31"]
+  default = ["aws_subnet.wes_sub_tf_priv_a.id","aws_subnet.wes_sub_tf_priv_c.id"]
+}
+
+variable "internet_gw" {
+  type = string
+  default = "igw-054a2658906c6a922"
+  
+}
+variable "vpc_id" {
+  type = string
+  default = "vpc-0050d085a3350c2c9"
+  
 }

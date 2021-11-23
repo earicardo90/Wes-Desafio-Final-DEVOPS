@@ -1,7 +1,7 @@
 resource "aws_security_group" "acessos_workers" {
   name        = "wes-k8s-workers"
   description = "acessos inbound traffic"
-  vpc_id = "vpc-0050d085a3350c2c9"
+  vpc_id = var.vpc_id
 
   ingress = [
     {
