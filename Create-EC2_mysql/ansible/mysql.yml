@@ -1,0 +1,84 @@
+- hosts: 
+  - ec2-mysql-dev
+  tasks:
+    - name: "Configura hostname ec2-mysql-dev"
+      shell: hostname ec2-mysql-dev && echo "ec2-mysql-dev" > /etc/hostname
+      become: yes
+# ---
+- hosts: 
+  - ec2-mysql-stage
+
+  tasks:
+    - name: "Configura hostname ec2-mysql-stage"
+      shell: hostname ec2-mysql-stage && echo "ec2-mysql-stage" > /etc/hostname
+      become: yes
+# ---
+- hosts: 
+  - ec2-mysql-prod
+  tasks:
+    - name: "Configura hostname ec2-mysql-prod"
+      shell: hostname ec2-mysql-prod && echo "ec2-mysql-prod" > /etc/hostname
+      become: yes
+# ---
+- hosts: all
+  environment:
+    DATABASE_URL: "mysql://127.0.0.1:3306/treinamento_database"
+    USER: "root"
+    PASSWORD: "Senha&12_torne00"
+  
+  tasks:
+  
+    - name: "Roda: sudo apt update"
+      become: yes
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400 #Um dia
+    
+    - name: "Instala pacotes em lote"
+      apt:
+        name: "{{ item }}"
+        state: latest
+      become: yes # roda com sudo
+      with_items:
+        - mysql-server
+        - python3-mysqldb
+      
+    
+    - name: "Lavanta serviço do mysql"
+      become: yes
+      service:
+        name: mysql
+        state: started
+
+    - name: "Criando senha root mysql"
+      become: yes
+      mysql_user:
+        name: root
+        host: localhost
+        password: Senha&12_torne00
+        priv: "*.*:ALL,GRANT"
+  
+    - name: "Cria o banco de dados MySQL"
+      mysql_db:
+        name: treinamento_database
+        login_user: root
+        login_password: Senha&12_torne00
+        state: present
+
+    - name: "Adicionar no bashrc"
+      lineinfile: dest=~/.bashrc line="export USER='root'" state=present
+     
+    - name: "Adicionar no bashrc 2"
+      lineinfile: dest=~/.bashrc line="export PASSWORD='Senha&12_torne00'" state=present
+
+    - name: "Adicionar no bashrc 3"
+      lineinfile: dest=~/.bashrc line="export DATABASE_URL='mysql://127.0.0.1:3306/treinamento_database'" state=present
+
+    - name: "Adicionar no bashrc 4"
+      lineinfile: dest=~/.bashrc line="export JAVA_HOME='/usr/lib/jvm/java-11-openjdk-amd64'" state=present
+      
+    - name: "Aplicar o bashrc"
+      shell: source ~/.bashrc
+      args:
+        executable: /bin/bash  
