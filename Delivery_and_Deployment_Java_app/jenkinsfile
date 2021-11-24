@@ -9,6 +9,8 @@ pipeline {
         string(name: 'DEV', defaultValue: '', description: 'Digite o ip do servidor de Desenvolvimento')
         string(name: 'STAGE', defaultValue: '', description: 'Digite o ip do servidor de Stage')
         string(name: 'PROD', defaultValue: '', description: 'Digite o ip do servidor de Produção')
+        string(name: 'K8sMAster', defaultValue: '', description: 'Digite o ip do Kubernets Master - 1')
+
     } 
     stages {
         stage('Clone repo') {

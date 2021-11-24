@@ -22,7 +22,7 @@
 # ---
 - hosts: all
   environment:
-    DATABASE_URL: "mysql://127.0.0.1:3306/treinamento_database"
+    DATABASE_URL: "mysql://127.0.0.1:3306/SpringWebYoutube"
     USER: "root"
     PASSWORD: "Senha&12_torne00"
   
@@ -61,7 +61,7 @@
   
     - name: "Cria o banco de dados MySQL"
       mysql_db:
-        name: treinamento_database
+        name: SpringWebYoutube
         login_user: root
         login_password: Senha&12_torne00
         state: present
@@ -73,7 +73,7 @@
       lineinfile: dest=~/.bashrc line="export PASSWORD='Senha&12_torne00'" state=present
 
     - name: "Adicionar no bashrc 3"
-      lineinfile: dest=~/.bashrc line="export DATABASE_URL='mysql://127.0.0.1:3306/treinamento_database'" state=present
+      lineinfile: dest=~/.bashrc line="export DATABASE_URL='mysql://127.0.0.1:3306/SpringWebYoutube'" state=present
 
     - name: "Adicionar no bashrc 4"
       lineinfile: dest=~/.bashrc line="export JAVA_HOME='/usr/lib/jvm/java-11-openjdk-amd64'" state=present
