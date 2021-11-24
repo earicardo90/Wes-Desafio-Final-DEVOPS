@@ -5,11 +5,11 @@ pipeline {
         string(name: 'USER', defaultValue: '', description: 'Digite o usuario do banco de dados "root"')
         string(name: 'PASSWORD', defaultValue: '', description: 'Digite a senha do banco de dados "Senha&12_torne00"')
         string(name: 'DATABASE', defaultValue: '', description: 'Digite o nome da database "SpringWebYoutube"')
-        string(name: 'DATABASE_URL', defaultValue: '', description: 'Digite a URL da DATABASE')
+        string(name: 'DATABASE_URL', defaultValue: '', description: 'Digite a URL da DATABASE "mysql://127.0.0.1:3306/treinamento_database"')
         string(name: 'DEV', defaultValue: '', description: 'Digite o ip do servidor myslq de Desenvolvimento')
         string(name: 'STAGE', defaultValue: '', description: 'Digite o ip do servidor mysql de Stage')
         string(name: 'PROD', defaultValue: '', description: 'Digite o ip do servidor mysql de Produção')
-        string(name: 'K8sMAster', defaultValue: '', description: 'Digite o ip publico ou DNS do Kubernets Master - 1')
+        string(name: 'K8sMaster', defaultValue: '', description: 'Digite o ip publico ou DNS do Kubernets Master - 1')
 
     } 
     stages {
