@@ -45,7 +45,7 @@ pipeline {
         }
         stage('Create files for deployment Kubernetes Java APP') {
             steps {
-                sh "Delivery_and_Deployment_Java_app/create_deployments.sh"
+                sh "Delivery_and_Deployment_Java_app/create_deployment.sh"
             }
         }
         stage('Deployment Kubernetes Java APP') {
