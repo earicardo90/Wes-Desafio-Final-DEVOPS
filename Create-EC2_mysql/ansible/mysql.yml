@@ -61,17 +61,17 @@
       become: yes
       mysql_user:
         name: root
-        host: localhost
+        host: "%"
         password: "Senha&12_torne00"
         priv: "*.*:ALL,GRANT"
 
-    - name: "Liberando acesso root externo"
-      become: yes
-      mysql_user:
-        name: root
-        host: "%"
-        password: "Senha&12_torne00"
-        priv: "*.*:ALL,GRANT"        
+    # - name: "Liberando acesso root externo"
+    #   become: yes
+    #   mysql_user:
+    #     name: root
+    #     host: "%"
+    #     password: "Senha&12_torne00"
+    #     priv: "*.*:ALL,GRANT"        
 
     - name: "Copia mysqld.cnf para os servidores"
       copy:

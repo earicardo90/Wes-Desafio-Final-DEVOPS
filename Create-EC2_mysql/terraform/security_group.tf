@@ -21,7 +21,7 @@ resource "aws_security_group" "mysql" {
       to_port          = 3306
       protocol         = "tcp"
       cidr_blocks      = []
-      security_groups  = ["var.sg_workers"]
+      security_groups  = ["${var.sg_workers}"]
       ipv6_cidr_blocks = null,
       prefix_list_ids = null,
       security_groups: null,
