@@ -36,7 +36,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: mysql-configmap-prod
-                  key: DATABASE_URL
+                  key: DATABASE_URL_PROD
           ports:
             - containerPort: 8080
   replicas: 2

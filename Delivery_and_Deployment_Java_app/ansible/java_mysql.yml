@@ -9,7 +9,7 @@
     PASSWORD: "{{ lookup('env', 'PASSWORD') }}"
     DATABASE: "{{ lookup('env', 'DATABASE') }}"
     USER: "{{ lookup('env', 'USER') }}"
-    
+   
   tasks:
     - name: "Copia dump mysql para servidor"
       copy:
@@ -23,7 +23,8 @@
 # ---      
 - hosts: 
     - kubernets-master
-  become: yes  
+  become: yes
+
   tasks:
     - name: "Copia os arquivos para executar o deployment dos pods"
       copy:

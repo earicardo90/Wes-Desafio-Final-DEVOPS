@@ -43,6 +43,11 @@ pipeline {
                 sh "Delivery_and_Deployment_Java_app/push_docker_hub.sh"
             }
         }
+        stage('Create files for deployment Kubernetes Java APP') {
+            steps {
+                sh "Delivery_and_Deployment_Java_app/create_deployments.sh"
+            }
+        }
         stage('Deployment Kubernetes Java APP') {
             steps {
                 sh "Delivery_and_Deployment_Java_app/deploy.sh"
