@@ -90,6 +90,9 @@
         login_user: root
         login_password: "Senha&12_torne00"
         state: present
+    
+    - name: "Restart do mysql" 
+      become: yes
       notify:
         - restart mysql        
 
