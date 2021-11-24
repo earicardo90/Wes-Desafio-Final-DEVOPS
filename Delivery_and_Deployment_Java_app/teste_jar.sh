@@ -1,2 +1,2 @@
-cd spring-web-youtube
+cd ../spring-web-youtube
 mvn test
