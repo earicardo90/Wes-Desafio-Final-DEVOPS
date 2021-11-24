@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'USER', defaultValue: '', description: 'Digite o usuario do banco de dados "root"')
+        string(name: 'PASSWORD', defaultValue: '', description: 'Digite a senha do banco de dados "Senha&12_torne00"')
+        string(name: 'DATABASE', defaultValue: '', description: 'Digite o nome da database "SpringWebYoutube"')
+        string(name: 'DEV', defaultValue: '', description: 'Digite o ip do servidor de Desenvolvimento')
+        string(name: 'STAGE', defaultValue: '', description: 'Digite o ip do servidor de Stage')
+        string(name: 'PROD', defaultValue: '', description: 'Digite o ip do servidor de Produção')
+    } 
+    stages {
+        stage('Clone repo') {
+            steps {
+                git url: 'https://github.com/weslleyfs/Wes-Desafio-Final-DEVOPS.git', branch: 'main'
+            }
+        }
+        stage('Clone repositorio Java App') {
+            steps {
+                sh "Delivery_and_Deployment_Java_app/Delivery_and_Deployment_Java_app/clone_repo_java_app.sh"
+            }
+        }
+                
+    }
+}

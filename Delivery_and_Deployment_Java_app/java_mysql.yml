@@ -1,0 +1,56 @@
+- hosts: # Rodar local
+  environment:
+    DATABASE_URL: "mysql://localhost:3306/{{ lookup('env', 'DATABASE') }}?useTimezone=true&serverTimezone=UTC"
+    PASSWORD: "{{ lookup('env', 'PASSWORD') }}"
+    USER: "{{ lookup('env', 'USER') }}"
+
+  tasks:
+    - name: "Roda: sudo apt-get update"
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+
+    - name: "clone projeto"
+      ansible.builtin.git:
+        repo: 'https://github.com/torneseumprogramador/spring-web-youtube'
+        dest: /home/ubuntu/spring-web-youtube
+        clone: yes
+        update: yes
+
+    - name: Adicionar USER no bashrc
+      lineinfile: dest=~/.bashrc line='export USER={{ lookup('env', 'USER') }}' state=present
+
+    - name: Adicionar PASSWORD no bashrc
+      lineinfile: dest=~/.bashrc line='export PASSWORD={{ lookup('env', 'PASSWORD') }}' state=present
+
+    - name: Adicionar DATABASE_URL no bashrc
+      lineinfile: dest=~/.bashrc line='export DATABASE_URL="mysql://localhost:3306/{{ lookup('env', 'DATABASE') }}?useTimezone=true&serverTimezone=UTC"' state=present
+
+    - name: Aplicar o bashrc
+      shell: source ~/.bashrc
+      args:
+        executable: /bin/bash
+# ---
+- hosts: 
+    - # colocar os hosts mysql
+  tasks:
+
+    - name: "Copia dump mysql para servidor"
+      copy:
+        src: "sql/db_backup.sql"
+        dest: "/home/ubuntu/"
+      become: yes
+
+    - name: "Restore dump mysql"
+      become: yes
+      shell: "mysql -u {{ lookup('env', 'USER') }} -p'{{ lookup('env', 'PASSWORD') }}' {{ lookup('env', 'DATABASE') }} < /home/ubuntu/db_backup.sql"
+
+    - name: "Build Package"
+      shell: "cd spring-web-youtube && mvn package"
+
+    - name: "Executando teste VPS"
+      shell: "cd spring-web-youtube && mvn test"
+
+    - name: "startando VPS"
+      shell: "cd spring-web-youtube && nohup mvn spring-boot:start &"      
