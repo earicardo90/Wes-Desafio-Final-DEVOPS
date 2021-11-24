@@ -5,6 +5,7 @@ pipeline {
         string(name: 'USER', defaultValue: '', description: 'Digite o usuario do banco de dados "root"')
         string(name: 'PASSWORD', defaultValue: '', description: 'Digite a senha do banco de dados "Senha&12_torne00"')
         string(name: 'DATABASE', defaultValue: '', description: 'Digite o nome da database "SpringWebYoutube"')
+        string(name: 'DATABASE_URL', defaultValue: '', description: 'Digite a URL da DATABASE')
         string(name: 'DEV', defaultValue: '', description: 'Digite o ip do servidor de Desenvolvimento')
         string(name: 'STAGE', defaultValue: '', description: 'Digite o ip do servidor de Stage')
         string(name: 'PROD', defaultValue: '', description: 'Digite o ip do servidor de Produção')
@@ -17,7 +18,27 @@ pipeline {
         }
         stage('Clone repositorio Java App') {
             steps {
-                sh "Delivery_and_Deployment_Java_app/clone_repo_java_app.sh"
+                sh "rm -rf spring-web-youtube && Delivery_and_Deployment_Java_app/clone_repo_java_app.sh"
+            }
+        }
+        stage('Build Java App') {
+            steps {
+                sh "Delivery_and_Deployment_Java_app/build_jar.sh"
+            }
+        }
+        stage('Teste Java App') {
+            steps {
+                sh "Delivery_and_Deployment_Java_app/teste_jar.sh"
+            }
+        }
+        stage('Build imagem Docker') {
+            steps {
+                sh "Delivery_and_Deployment_Java_app/build_docker.sh"
+            }
+        }
+        stage('Upload imagem DockerHub') {
+            steps {
+                sh "Delivery_and_Deployment_Java_app/push_docker_hub.sh"
             }
         }
                 
