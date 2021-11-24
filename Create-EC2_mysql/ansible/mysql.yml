@@ -62,7 +62,7 @@
       mysql_user:
         name: root
         host: localhost
-        password: Senha&12_torne00
+        password: "Senha&12_torne00"
         priv: "*.*:ALL,GRANT"
 
     - name: "Liberando acesso root externo"
@@ -70,7 +70,7 @@
       mysql_user:
         name: root
         host: "%"
-        password: Senha&12_torne00
+        password: "Senha&12_torne00"
         priv: "*.*:ALL,GRANT"        
 
     - name: "Copia mysqld.cnf para os servidores"
@@ -83,7 +83,7 @@
       mysql_db:
         name: SpringWebYoutube
         login_user: root
-        login_password: Senha&12_torne00
+        login_password: "Senha&12_torne00"
         state: present
       notify:
         - "restart mysql"        
