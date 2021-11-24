@@ -22,9 +22,7 @@ resource "aws_security_group" "mysql" {
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       protocol         = "tcp"
-      security_groups  = [
-        "var.sg_workers"
-      ]
+      security_groups  = ["${var.sg_workers}"]
       self             = false
       to_port          = 30002
     },
