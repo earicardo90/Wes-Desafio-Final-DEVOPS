@@ -16,16 +16,17 @@ resource "aws_security_group" "mysql" {
       self: null
     },
     {
-      description      = "Mysql from subnet"
-      from_port        = 3306
-      to_port          = 3306
-      protocol         = "tcp"
       cidr_blocks      = []
-      security_groups  = ["${var.sg_workers}"]
-      ipv6_cidr_blocks = null,
-      prefix_list_ids = null,
-      security_groups: null,
-      self: null
+      description      = "Libera acesso dos workers para o mysql"
+      from_port        = 30000
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "-1"
+      security_groups  = [
+        "var.sg_workers"
+      ]
+      self             = false
+      to_port          = 30002
     },
     
   ]
