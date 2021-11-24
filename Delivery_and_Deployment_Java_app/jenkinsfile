@@ -6,10 +6,10 @@ pipeline {
         string(name: 'PASSWORD', defaultValue: '', description: 'Digite a senha do banco de dados "Senha&12_torne00"')
         string(name: 'DATABASE', defaultValue: '', description: 'Digite o nome da database "SpringWebYoutube"')
         string(name: 'DATABASE_URL', defaultValue: '', description: 'Digite a URL da DATABASE')
-        string(name: 'DEV', defaultValue: '', description: 'Digite o ip do servidor de Desenvolvimento')
-        string(name: 'STAGE', defaultValue: '', description: 'Digite o ip do servidor de Stage')
-        string(name: 'PROD', defaultValue: '', description: 'Digite o ip do servidor de Produção')
-        string(name: 'K8sMAster', defaultValue: '', description: 'Digite o ip do Kubernets Master - 1')
+        string(name: 'DEV', defaultValue: '', description: 'Digite o ip do servidor myslq de Desenvolvimento')
+        string(name: 'STAGE', defaultValue: '', description: 'Digite o ip do servidor mysql de Stage')
+        string(name: 'PROD', defaultValue: '', description: 'Digite o ip do servidor mysql de Produção')
+        string(name: 'K8sMAster', defaultValue: '', description: 'Digite o ip publico ou DNS do Kubernets Master - 1')
 
     } 
     stages {
@@ -41,6 +41,16 @@ pipeline {
         stage('Upload imagem DockerHub') {
             steps {
                 sh "Delivery_and_Deployment_Java_app/push_docker_hub.sh"
+            }
+        }
+        stage('Deployment Kubernetes Java APP') {
+            steps {
+                sh "Delivery_and_Deployment_Java_app/deploy.sh"
+            }
+        }
+        stage('Validação Java APP K8s') {
+            steps {
+                sh "Delivery_and_Deployment_Java_app/valida_app_java_k8s.sh"
             }
         }
                 
