@@ -25,9 +25,15 @@
     DATABASE_URL: "mysql://127.0.0.1:3306/SpringWebYoutube"
     USER: "root"
     PASSWORD: "Senha&12_torne00"
-  
-  tasks:
-  
+
+    handlers:
+    - name: "restart mysql"
+      service:
+        name: mysql
+        state: restarted
+      become: yes
+
+  tasks:  
     - name: "Roda: sudo apt update"
       become: yes
       apt:
@@ -58,13 +64,29 @@
         host: localhost
         password: Senha&12_torne00
         priv: "*.*:ALL,GRANT"
-  
+
+    - name: "Liberando acesso root externo"
+      become: yes
+      mysql_user:
+        name: root
+        host: "%"
+        password: Senha&12_torne00
+        priv: "*.*:ALL,GRANT"        
+
+    - name: "Copia mysqld.cnf para os servidores"
+      copy:
+        src: "mysqld.cnf"
+        dest: "/etc/mysql/mysql.conf.d/mysqld.cnf"
+      become: yes
+
     - name: "Cria o banco de dados MySQL"
       mysql_db:
         name: SpringWebYoutube
         login_user: root
         login_password: Senha&12_torne00
         state: present
+      notify:
+        - "restart mysql"        
 
     - name: "Adicionar no bashrc"
       lineinfile: dest=~/.bashrc line="export USER='root'" state=present
