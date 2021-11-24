@@ -1,0 +1,38 @@
+# - hosts: # Rodar local
+#   environment:
+#     DATABASE_URL: "mysql://localhost:3306/{{ lookup('env', 'DATABASE') }}?useTimezone=true&serverTimezone=UTC"
+#     PASSWORD: "{{ lookup('env', 'PASSWORD') }}"
+#     USER: "{{ lookup('env', 'USER') }}"
+
+- hosts: 
+  - database
+  environment:
+    PASSWORD: "{{ lookup('env', 'PASSWORD') }}"
+    DATABASE: "{{ lookup('env', 'DATABASE') }}"
+    USER: "{{ lookup('env', 'USER') }}"
+    
+  tasks:
+    - name: "Copia dump mysql para servidor"
+      copy:
+        src: "sql/db_backup.sql"
+        dest: "/home/ubuntu/"
+      become: yes
+
+    - name: "Restore dump mysql"
+      become: yes
+      shell: "mysql -u {{ lookup('env', 'USER') }} -p'{{ lookup('env', 'PASSWORD') }}' {{ lookup('env', 'DATABASE') }} < /home/ubuntu/db_backup.sql"
+      
+# ---      
+
+- hosts: 
+    - kubernets-master
+  tasks:
+    - name: "Copia os arquivos para executar o deployment dos pods"
+      copy:
+        src: "kubernets/*.yml"
+        dest: "/home/ubuntu/"
+      become: yes
+
+    - name: "Aplica o deployment no kubernetes master"
+      become: yes
+      shell: "mysql -u {{ lookup('env', 'USER') }} -p'{{ lookup('env', 'PASSWORD') }}' {{ lookup('env', 'DATABASE') }} < /home/ubuntu/db_backup.sql"     

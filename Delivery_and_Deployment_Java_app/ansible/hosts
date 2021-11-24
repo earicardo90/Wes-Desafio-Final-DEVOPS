@@ -1,0 +1,8 @@
+[database]
+$DEV
+$STAGE
+$PROD
+
+[kubernets-master]
+$K8sMaster
+

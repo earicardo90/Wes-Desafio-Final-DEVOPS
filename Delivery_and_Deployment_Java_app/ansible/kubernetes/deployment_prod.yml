@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-deployment-prod
+spec:
+  template:
+    metadata:
+      name: pod-javadb-prod
+      labels:
+        app: pod-javadb-prod
+    spec:
+      containers:
+        - name: container-pod-javadb-prod
+          image: weslleyf/crud-java-login:v0.0.1
+          env:
+            - name: USER
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-configmap-prod
+                  key: USER
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: PASSWORD
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-configmap-prod
+                  key: DATABASE_URL
+          ports:
+            - containerPort: 8080
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pod-javadb-prod
+
+---
+
+apiVersion: apps/v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap-prod
+data:
+  USER: $USER
+  DATABASE_URL: mysql://$prod:3306/$database?useTimezone=true&serverTimezone=UTC
+  
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+data:
+  PASSWORD: U2VuaGEmMTJfdG9ybmUwMAo= # senha encoded 
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeport-pod-javadb-prod
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 30002 # 30000 ~ 32767
+  selector:
+    app: pod-javadb-prod
