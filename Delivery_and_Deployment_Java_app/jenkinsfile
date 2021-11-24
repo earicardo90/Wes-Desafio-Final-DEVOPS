@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Clone repositorio Java App') {
             steps {
-                sh "rm -rf spring-web-youtube && Delivery_and_Deployment_Java_app/clone_repo_java_app.sh"
+                sh "rm -rf Delivery_and_Deployment_Java_app/spring-web-youtube && Delivery_and_Deployment_Java_app/clone_repo_java_app.sh"
             }
         }
         stage('Build Java App') {

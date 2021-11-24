@@ -7,4 +7,4 @@
 #### Pegando ultima tag do git #####
 tag=$(git describe --tags $(git rev-list --tags --max-count=1))
 echo "Fazendo deploy da tag $tag"
-docker build -t "weslleyf/crud-java-login:$tag" -f Dockerfile .
+docker build -t "weslleyf/crud-java-login:$tag" -f Delivery_and_Deployment_Java_app/Dockerfile .
