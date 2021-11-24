@@ -26,6 +26,17 @@ resource "aws_security_group" "acessos_master" {
       self             = true
       to_port          = 0
     },
+    {
+      cidr_blocks      = []
+      description      = "Libera externo para as aplicações Java"
+      from_port        = 30000
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "-1"
+      security_groups  = []
+      self             = true
+      to_port          = 30002
+    },    
     # {
     #   cidr_blocks      = []
     #   description      = "Libera acesso k8s_workers"

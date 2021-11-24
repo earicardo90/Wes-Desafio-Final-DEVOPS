@@ -1,20 +1,25 @@
 #!/bin/bash
-
-terraform init
-terraform apply -auto-approve
-
-echo  "Aguardando a criação das maquinas ..."
-sleep 20
-
-HOST_DNS=$(terraform output | grep Public| awk '{print $3}')
-
 echo "
-[ec2-java]
-$HOST_DNS
-" > hosts
+[database]
+$DEV
+$STAGE
+$PROD
 
-ANSIBLE_HOST_KEY_CHECKING=False PASSWORD=root DATABASE=SpringWebYoutube ansible-playbook -i hosts java_mysql.yml -u ubuntu --private-key ~ubuntu/.ssh/weslley_itau_rsa
+[kubernets-master]
+$K8sMaster
+" > Delivery_and_Deployment_Java_app/ansible/hosts
+cd Delivery_and_Deployment_Java_app/ansible
 
-echo  "Acessando via SH"
-sleep 5
-ssh -i ~ubuntu/.ssh/weslley_itau_rsa ubuntu@$HOST_DNS -o ServerAliveInterval=60 -o StrictHostKeyChecking=no
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts java_mysql.yml -u ubuntu --private-key /var/lib/jenkins/.ssh/weslley_itau_rsa
+
+echo  "Aguardando o start das aplicações"
+sleep 10
+
+echo "Validação da aplicação de DEV"
+curl http://$DEV:30000
+
+echo "Validação da aplicação de STAGE"
+curl http://$STAGE:30001
+
+echo "Validação da aplicação de PROD"
+curl http://$PROD:30002
