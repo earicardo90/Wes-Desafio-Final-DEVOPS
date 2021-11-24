@@ -13,7 +13,7 @@ echo "
 $HOST_DNS
 " > hosts
 
-ANSIBLE_HOST_KEY_CHECKING=False USER=root PASSWORD=root DATABASE=SpringWebYoutube ansible-playbook -i hosts java_mysql.yml -u ubuntu --private-key ~ubuntu/.ssh/weslley_itau_rsa
+ANSIBLE_HOST_KEY_CHECKING=False PASSWORD=root DATABASE=SpringWebYoutube ansible-playbook -i hosts java_mysql.yml -u ubuntu --private-key ~ubuntu/.ssh/weslley_itau_rsa
 
 echo  "Acessando via SH"
 sleep 5
