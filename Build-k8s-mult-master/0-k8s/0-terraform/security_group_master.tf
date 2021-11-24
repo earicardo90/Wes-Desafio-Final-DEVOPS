@@ -27,15 +27,15 @@ resource "aws_security_group" "acessos_master" {
       to_port          = 0
     },
     {
-      cidr_blocks      = []
-      description      = "Libera externo para as aplicações Java"
+      description      = "http from VPC"
       from_port        = 30000
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      protocol         = "-1"
-      security_groups  = []
-      self             = true
       to_port          = 30002
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+      prefix_list_ids  = null,
+      security_groups  = null,
+      self             = null
     },    
     # {
     #   cidr_blocks      = []
