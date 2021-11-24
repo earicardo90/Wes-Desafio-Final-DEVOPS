@@ -26,12 +26,15 @@
     USER: "root"
     PASSWORD: "Senha&12_torne00"
 
-    handlers:
-    - name: "restart mysql"
-      service:
-        name: mysql
-        state: restarted
-      become: yes
+  handlers:
+    - name: start mysql
+      service: name=mysql
+               enabled=yes
+               state=started
+    - name: restart mysql
+      service: name=mysql
+               enabled=yes
+               state=restarted
 
   tasks:  
     - name: "Roda: sudo apt update"
@@ -88,7 +91,7 @@
         login_password: "Senha&12_torne00"
         state: present
       notify:
-        - "restart mysql"        
+        - restart mysql        
 
     - name: "Adicionar no bashrc"
       lineinfile: dest=~/.bashrc line="export USER='root'" state=present
