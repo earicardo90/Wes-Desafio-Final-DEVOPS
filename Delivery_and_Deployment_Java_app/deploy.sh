@@ -16,10 +16,10 @@ echo  "Aguardando o start das aplicações"
 sleep 10
 
 echo "Validação da aplicação de DEV"
-curl http://$DEV:30000
+curl http://$K8sMaster:30000
 
 echo "Validação da aplicação de STAGE"
-curl http://$STAGE:30001
+curl http://$K8sMaster:30001
 
 echo "Validação da aplicação de PROD"
-curl http://$PROD:30002
+curl http://$K8sMaster:30002
