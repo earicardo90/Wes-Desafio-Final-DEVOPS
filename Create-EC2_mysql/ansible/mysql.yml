@@ -41,7 +41,7 @@
       apt:
         name: "{{ item }}"
         state: latest
-      become: yes # roda com sudo
+      become: yes
       with_items:
         - mysql-server
         - python3-mysqldb
@@ -57,7 +57,7 @@
       become: yes
       mysql_user:
         name: "{{ lookup('env', 'USER') }}"
-        host: localhost
+        host: '%'
         password: "{{ lookup('env', 'PASSWORD') }}"
         priv: "*.*:ALL,GRANT"
 
@@ -69,37 +69,20 @@
 
     - name: "Cria o banco de dados MySQL"
       mysql_db:
-        name: SpringWebYoutube
-        login_user: root
-        login_password: "Senha&12_torne00"
-        state: present
-
-    - name: "Liberando acesso root externo"
-      become: yes
-      mysql_user:
-        name: "{{ lookup('env', 'USER') }}"
-        host: '%'
+        name: "{{ lookup('env', 'DATABASE') }}"
         login_user: "{{ lookup('env', 'USER') }}"
         login_password: "{{ lookup('env', 'PASSWORD') }}"
-        priv: "*.*:ALL,GRANT" 
+        state: present
+
+    # - name: "Liberando acesso root externo"
+    #   become: yes
+    #   mysql_user:
+    #     name: "{{ lookup('env', 'USER') }}"
+    #     host: '%'
+    #     login_user: "{{ lookup('env', 'USER') }}"
+    #     login_password: "{{ lookup('env', 'PASSWORD') }}"
+    #     priv: "*.*:ALL,GRANT" 
 
     - name: "Restart mysql"
       become: yes
       shell: "service mysql restart"
-    
-    # - name: "Adicionar no bashrc"
-    #   lineinfile: dest=~/.bashrc line="export USER='root'" state=present
-     
-    # - name: "Adicionar no bashrc 2"
-    #   lineinfile: dest=~/.bashrc line="export PASSWORD='Senha&12_torne00'" state=present
-
-    # - name: "Adicionar no bashrc 3"
-    #   lineinfile: dest=~/.bashrc line="export DATABASE_URL="{{ lookup('env', 'DATABASE_URL') }}"" state=present
-
-    # - name: "Adicionar no bashrc 4"
-    #   lineinfile: dest=~/.bashrc line="export JAVA_HOME='/usr/lib/jvm/java-11-openjdk-amd64'" state=present
-      
-    # - name: "Aplicar o bashrc"
-    #   shell: source ~/.bashrc
-    #   args:
-    #     executable: /bin/bash  
