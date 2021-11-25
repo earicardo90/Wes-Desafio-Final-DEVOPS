@@ -9,12 +9,12 @@
 
 ## Sobre o projeto
 
-**Objetivo:** Exercitar os conhecimentos adquiridos do treinamento
-Meta:
--  Criar uma **rede isolada** para esta aplicação
--  Criar uma **pipeline** de infraestrutura para provisionar uma imagem que será utilizada em um cluster kubernetes (single master)
--  Criar uma **pipeline** para provisionar um cluster Kubernetes multi master utilizando a imagem criada na pipeline de infraestrutura 
-- Criar uma pipeline para provisionar o banco de dados (dev, stage, prod) que será utilizado nas aplicações que estarão no kubernetes. Esta base de dados, será provisionada em uma instância privada, com acesso a Internet via Nat Gateway na mesma vpc do kubernetes multi master
+**Objetivo:** Exercitar os conhecimentos adquiridos do treinamento:
+
+-  Criar uma **rede isolada** para a aplicação;
+-  Criar uma **pipeline** de infraestrutura para provisionar uma imagem que será utilizada em um cluster kubernetes (single master);
+-  Criar uma **pipeline** para provisionar um cluster Kubernetes multi master utilizando a imagem criada na pipeline de infraestrutura;
+- Criar uma pipeline para provisionar o banco de dados (dev, stage, prod) que será utilizado nas aplicações que estarão no kubernetes. Esta base de dados, será provisionada em uma instância privada, com acesso a Internet via Nat Gateway na mesma vpc do kubernetes multi master;
 -  Criar uma **pipeline** de desenvolvimento para deployar os ambientes de uma aplicação Java (dev, stage, prod) com ligação a um banco de dados mysql-server (utilizar o cluster kubernetes(multi master) provisionado pela pipeline de infraestrutura.
   
 Para ver o **Repositório do projeto**, clique aqui: [repo-desafio-final-devops](https://github.com/weslleyfs/Wes-Desafio-Final-Devops)</br>
@@ -23,8 +23,8 @@ Para ver o **Repositório do projeto**, clique aqui: [repo-desafio-final
 
 - [Ricardo Bastos Natalino](https://github.com/)
 - [Ronaldo Yudi Endo](https://github.com/ryudik)
-- [Tiago R. Sartorato](https://github.com/)
-- [Vinicius Faraco Gimenes](https://github.com/)
+- [Tiago R. Sartorato](https://github.com/tgosartorato)
+- [Vinicius Faraco Gimenes](https://github.com/vinigim)
 - [Weslley Ferreira Dos Santos](https://github.com/weslleyfs)
 
 ## Tecnologias
@@ -48,7 +48,10 @@ Plataformas e Tecnologias que utilizamos para desenvolver este projeto:
   
 ### Pré-requisitos
 
-Configure um banco de dados [PostgreSQL](https://www.postgresql.org/) na sua máquina e crie um novo banco.
+- Ter acesso ao Jenkins onde serão executadas as Pipelines [Jenkins](http://18.230.108.101:8080/);
+- Ter acesso a console [AWS](https://console.aws.amazon.com/console/home?nc2=h_ct&src=header-signin);
+- Ter uma VPC com Internet Gataway criados e uma Kay pair.
+> Obs: será necessário vornecer os IDs da VPC, Internet Gataway e Key Pair para as variaveis do terraform
 
 #### Criação da pipeline de infraestrutura para provisionar e guardar uma imagem**
 
