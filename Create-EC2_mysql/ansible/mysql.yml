@@ -83,7 +83,7 @@
         host: '%'
         login_user: "{{ lookup('env', 'ADMIN') }}"
         login_password: "{{ lookup('env', 'PASSWORD') }}"
-        priv: ".*:ALL,GRANT" 
+        priv: "*.*:ALL,GRANT" 
 
     - name: "Restart mysql"
       become: yes
