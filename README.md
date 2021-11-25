@@ -1,10 +1,12 @@
 # Desafio Treinamento Devops
 </h3>
 <p align="center">
-  <a href="#sobre o projeto">Sobre o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#sobreoprojeto">Sobre o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#desenvolvedores">Desenvolvedores</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#iniciando">Iniciando</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#funcionalidades">Funcionalidades</a>
+  <a href="#descricaodoprojeto">Descrição do projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#prerequisitos">Pré requisitos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#utilizacao">Utilização</a>
 </p>
 
 ## Sobre o projeto
@@ -53,7 +55,7 @@ Plataformas e Tecnologias que utilizamos para desenvolver este projeto:
 - Ter uma VPC com Internet Gataway criados e uma Key pair.
 > Obs: será necessário fornecer os IDs da VPC, Internet Gataway e Key Pair para as variaveis do terraform
 
-## Sida as etapas abaixo:
+### Utilização:
 
 **1.** Faça o clone do repositorio para sua maquina;
 
@@ -72,8 +74,7 @@ git clone https://github.com/weslleyfs/Wes-Desafio-Final-DEVOPS.git
 >>>>> **4º Delivery_and_Deployment_Java_app**
 
 
-* Logado no Jenkins selecione **New Item** > Digite um nome para sua Pipeline > Selecione a opção **Pipeline** > **OK**
-* Dentro de cada pasta do projeto existe o arquivo "jenkinsfile" que deve ser utilizado para construção das Pipelines, copie seu conteudo para o campo script > **SAVE**
+* Logado no [Jenkins](http://18.230.108.101:8080/) selecione **New Item** **>** Digite um nome para sua Pipeline **>** Selecione a opção **Pipeline** **>** **OK**
+* Dentro de cada pasta do projeto existe um arquivo chamado "jenkinsfile" que deve ser utilizado para construção das respectivas Pipelines, copie seu conteudo para o campo **Script** **>** **SAVE**
 * Selecione a opção **Build Now** e após finalizar, atualize sua pagina e selecione a opção **Build with Parameters**
 * Digite os parametros necessários conforme descrição de cada etapa.
- 
