@@ -1,5 +1,5 @@
 #!/bin/bash
-echo $JAVA
+echo $USER
 echo $PASSWORD
 echo $DATABASE
 echo $DEV
@@ -12,7 +12,7 @@ kind: ConfigMap
 metadata:
   name: mysql-configmap-prod
 data:
-  USER: $JAVA
+  USER: $USER
   PASSWORD: $PASSWORD
   DATABASE_URL: mysql://$PROD:3306/$DATABASE?useTimezone=true&serverTimezone=UTC
 ---
@@ -75,7 +75,7 @@ kind: ConfigMap
 metadata:
   name: mysql-configmap-stage
 data:
-  USER: $JAVA
+  USER: $USER
   PASSWORD: $PASSWORD
   DATABASE_URL: mysql://$STAGE:3306/$DATABASE?useTimezone=true&serverTimezone=UTC
 ---
@@ -137,7 +137,7 @@ kind: ConfigMap
 metadata:
   name: mysql-configmap-dev
 data:
-  USER: $JAVA
+  USER: $USER
   PASSWORD: $PASSWORD
   DATABASE_URL: mysql://$DEV:3306/$DATABASE?useTimezone=true&serverTimezone=UTC
 ---

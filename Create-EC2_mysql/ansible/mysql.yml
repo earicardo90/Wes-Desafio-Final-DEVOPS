@@ -24,8 +24,7 @@
   environment:
     PASSWORD: "{{ lookup('env', 'PASSWORD') }}"
     DATABASE: "{{ lookup('env', 'DATABASE') }}"
-    ADMIN: "{{ lookup('env', 'ADMIN') }}"
-    JAVA: "{{ lookup('env', 'JAVA') }}"
+    USER: "{{ lookup('env', 'USER') }}"
 
   tasks:  
     - name: "Roda: sudo apt update"
@@ -57,7 +56,7 @@
     - name: "Criando senha root mysql"
       become: yes
       mysql_user:
-        name: "{{ lookup('env', 'ADMIN') }}"
+        name: "{{ lookup('env', 'USER') }}"
         host: localhost
         password: "{{ lookup('env', 'PASSWORD') }}"
         priv: "*.*:ALL,GRANT"
@@ -72,18 +71,13 @@
     - name: "Cria o banco de dados MySQL"
       mysql_db:
         name: "{{ lookup('env', 'DATABASE') }}"
-        login_user: "{{ lookup('env', 'ADMIN') }}"
+        login_user: "{{ lookup('env', 'USER') }}"
         login_password: "{{ lookup('env', 'PASSWORD') }}"
         state: present
 
-    - name: "Cria usuario com acesso externo"
+    - name: "Libera permissão para acesso externo a database"
       become: yes
-      mysql_user:
-        name: "{{ lookup('env', 'JAVA') }}"
-        host: '%'
-        login_user: "{{ lookup('env', 'ADMIN') }}"
-        login_password: "{{ lookup('env', 'PASSWORD') }}"
-        priv: "*.*:ALL,GRANT" 
+      shell: "mysql -u {{ lookup('env', 'USER') }} -p'{{ lookup('env', 'PASSWORD') }}' --execute='CREATE USER '{{ lookup('env', 'USER') }}'@'%' IDENTIFIED WITH mysql_native_password BY '{{ lookup('env', 'PASSWORD') }}'; GRANT ALL PRIVILEGES ON *.* TO '{{ lookup('env', 'USER') }}'@'%'; FLUSH PRIVILEGES;'"
 
     - name: "Restart mysql"
       become: yes
