@@ -65,10 +65,10 @@ git clone https://github.com/weslleyfs/Wes-Desafio-Final-DEVOPS.git
 
 **3.** Acesse o [Jenkins](http://18.230.108.101:8080/) para iniciar a contrução das Pipelines;
 > **IMPORTANTE: A sequencia de criação e execução das Pipelines devem ser seguindas da seguinte forma:**
-> **1 Build_AMI_AWS**
-> **2 Build-k8s-mult-master**
-> **3 Create-EC2_mysql**
-> **4 Delivery_and_Deployment_Java_app**
+>> **1 Build_AMI_AWS**
+>> **2 Build-k8s-mult-master**
+>> **3 Create-EC2_mysql**
+>> **4 Delivery_and_Deployment_Java_app**
 > **Pois os outputs de cada Pipeline serão necessários para construção da Pipeline seguinte.**
 
 * Logado no Jenkins selecione **New Item** > Digite um nome para sua Pipeline > Selecione a opção **Pipeline** > **OK**
