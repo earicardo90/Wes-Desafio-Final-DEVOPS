@@ -26,16 +26,6 @@
     USER: "root"
     PASSWORD: "Senha&12_torne00"
 
-  handlers:
-    - name: start mysql
-      service: name=mysql
-               enabled=yes
-               state=started
-    - name: restart mysql
-      service: name=mysql
-               enabled=yes
-               state=restarted
-
   tasks:  
     - name: "Roda: sudo apt update"
       become: yes
@@ -82,8 +72,6 @@
         src: "mysqld.cnf"
         dest: "/etc/mysql/mysql.conf.d/mysqld.cnf"
       become: yes
-      notify:
-        - restart mysql      
 
     - name: "Cria o banco de dados MySQL"
       mysql_db:
@@ -91,6 +79,10 @@
         login_user: root
         login_password: "Senha&12_torne00"
         state: present
+
+    - name: "Restart mysql"
+      become: yes
+      shell: "service mysql restart"
     
     - name: "Adicionar no bashrc"
       lineinfile: dest=~/.bashrc line="export USER='root'" state=present
