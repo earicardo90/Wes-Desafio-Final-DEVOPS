@@ -1,5 +1,5 @@
 #!/bin/bash
-
+sleep 10
 echo "Validação da aplicação de DEV"
 curl http://$K8sMaster:30000
 
