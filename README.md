@@ -1,12 +1,11 @@
 # Desafio Treinamento Devops
 </h3>
 <p align="center">
-  <a href="#sobreoprojeto">Sobre o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#desenvolvedores">Desenvolvedores</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#descriçãodoprojeto">Descrição do projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#prerequisitos">Pré requisitos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-<a href="#utilização">Utilização</a>
+ <a href="#sobreoprojeto">Sobre o projeto</a> |
+ <a href="#desenvolvedores">Desenvolvedores</a> |
+ <a href="#tecnologias">Tecnologias</a> |
+ <a href="#descriçãodoprojeto">Descrição do projeto</a> |
+ <a href="#prerequisitos">Pré requisitos</a> | <a href="#utilização">Utilização</a>
 </p>
 
 ## Sobre o projeto
