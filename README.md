@@ -64,13 +64,13 @@ git clone https://github.com/weslleyfs/Wes-Desafio-Final-DEVOPS.git
 **2.** Altere os arquivos de variaveis dentro de cada pasta terraform colocando os IDs da VPC, Internet Gataway e Key Pair;
 
 **3.** Acesse o [Jenkins](http://18.230.108.101:8080/) para iniciar a contrução das Pipelines;
-> **IMPORTANTE: A sequencia de criação e execução das Pipelines devem ser seguindas da seguinte forma:**
->> **1 Build_AMI_AWS**
->>> **2 Build-k8s-mult-master**
->>>> **3 Create-EC2_mysql**
->>>>> **4 Delivery_and_Deployment_Java_app**
 
-> **Pois os outputs de cada Pipeline serão necessários para construção da Pipeline seguinte.**
+> **IMPORTANTE: A sequencia de criação e execução das Pipelines devem ser respeitadas pois o output de cada Pipeline serão necessários para a contrução da proxima Pipeline:**
+>> **1º Build_AMI_AWS**
+>>> **2º Build-k8s-mult-master**
+>>>> **3º Create-EC2_mysql**
+>>>>> **4º Delivery_and_Deployment_Java_app**
+
 
 * Logado no Jenkins selecione **New Item** > Digite um nome para sua Pipeline > Selecione a opção **Pipeline** > **OK**
 * Dentro de cada pasta do projeto existe o arquivo "jenkinsfile" que deve ser utilizado para construção das Pipelines, copie seu conteudo para o campo script > **SAVE**
