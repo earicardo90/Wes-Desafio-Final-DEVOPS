@@ -50,8 +50,8 @@ Plataformas e Tecnologias que utilizamos para desenvolver este projeto:
   
 ### Pré-requisitos
 
-- Ter acesso ao Jenkins onde serão executadas as Pipelines [Jenkins](http://18.230.108.101:8080/);
-- Ter acesso a console [AWS](https://console.aws.amazon.com/console/home?nc2=h_ct&src=header-signin);
+- Ter acesso ao Jenkins onde serão executadas as Pipelines **[Jenkins](http://18.230.108.101:8080/)**;
+- Ter acesso a console **[AWS](https://console.aws.amazon.com/console/home?nc2=h_ct&src=header-signin)**;
 - Ter uma VPC com Internet Gataway criados e uma Key pair.
 > Obs: será necessário fornecer os IDs da VPC, Internet Gataway e Key Pair para as variaveis do terraform
 
@@ -65,7 +65,7 @@ git clone https://github.com/weslleyfs/Wes-Desafio-Final-DEVOPS.git
 
 **2.** Altere os arquivos de variaveis dentro de cada pasta terraform colocando os IDs da VPC, Internet Gataway e Key Pair;
 
-**3.** Acesse o [Jenkins](http://18.230.108.101:8080/) para iniciar a contrução das Pipelines;
+**3.** Acesse o **[Jenkins](http://18.230.108.101:8080/)** para iniciar a contrução das Pipelines;
 
 > **IMPORTANTE: A sequencia de criação e execução das Pipelines devem ser respeitadas pois o output de cada Pipeline serão necessários para a contrução da proxima Pipeline:**
 >> **1º Build_AMI_AWS**
@@ -74,7 +74,7 @@ git clone https://github.com/weslleyfs/Wes-Desafio-Final-DEVOPS.git
 >>>>> **4º Delivery_and_Deployment_Java_app**
 
 
-* Logado no [Jenkins](http://18.230.108.101:8080/) selecione **New Item** **>** Digite um nome para sua Pipeline **>** Selecione a opção **Pipeline** **>** **OK**
+* Logado no **[Jenkins](http://18.230.108.101:8080/)** selecione **New Item** **>** Digite um nome para sua Pipeline **>** Selecione a opção **Pipeline** **>** **OK**
 * Dentro de cada pasta do projeto existe um arquivo chamado "jenkinsfile" que deve ser utilizado para construção das respectivas Pipelines, copie seu conteudo para o campo **Script** **>** **SAVE**
 * Selecione a opção **Build Now** e após finalizar, atualize sua pagina e selecione a opção **Build with Parameters**
 * Digite os parametros necessários conforme descrição de cada etapa.
