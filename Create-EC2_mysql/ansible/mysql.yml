@@ -54,7 +54,7 @@
       become: yes
       mysql_user:
         name: root
-        host: '%'
+        host: localhost
         password: "Senha&12_torne00"
         priv: "*.*:ALL,GRANT"
 
@@ -62,7 +62,7 @@
       become: yes
       mysql_user:
         name: root
-        host: "%"
+        host: '%'
         login_user: "root"
         login_password: "Senha&12_torne00"
         priv: "*.*:ALL,GRANT"        
