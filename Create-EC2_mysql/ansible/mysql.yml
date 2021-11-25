@@ -36,7 +36,7 @@
     
     - name: "Aguarda finalizar o update"
       shell: "sleep 15"
-      
+
     - name: "Instala pacotes em lote"
       apt:
         name: "{{ item }}"
@@ -57,18 +57,9 @@
       become: yes
       mysql_user:
         name: "{{ lookup('env', 'USER') }}"
-        host: '%'
+        host: localhost
         password: "{{ lookup('env', 'PASSWORD') }}"
         priv: "*.*:ALL,GRANT"
-
-    # - name: "Liberando acesso root externo"
-    #   become: yes
-    #   mysql_user:
-    #     name: "{{ lookup('env', 'USER') }}"
-    #     host: '%'
-    #     login_user: "{{ lookup('env', 'USER') }}"
-    #     login_password: "{{ lookup('env', 'PASSWORD') }}"
-    #     priv: "*.*:ALL,GRANT"        
 
     - name: "Copia mysqld.cnf para os servidores"
       copy:
@@ -82,6 +73,15 @@
         login_user: root
         login_password: "Senha&12_torne00"
         state: present
+
+    - name: "Liberando acesso root externo"
+      become: yes
+      mysql_user:
+        name: "{{ lookup('env', 'USER') }}"
+        host: '%'
+        login_user: "{{ lookup('env', 'USER') }}"
+        login_password: "{{ lookup('env', 'PASSWORD') }}"
+        priv: "*.*:ALL,GRANT" 
 
     - name: "Restart mysql"
       become: yes
