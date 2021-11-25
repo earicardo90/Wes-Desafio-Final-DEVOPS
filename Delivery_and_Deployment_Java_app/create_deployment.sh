@@ -5,7 +5,6 @@ echo $DATABASE
 echo $DEV
 echo $PROD 
 echo $STAGE
-
 cat <<EOF > Delivery_and_Deployment_Java_app/kubernetes/deployment_prod.yml
 apiVersion: v1
 kind: ConfigMap
@@ -52,10 +51,7 @@ spec:
   selector:
     matchLabels:
       app: pod-javadb-prod
-
- 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -68,7 +64,6 @@ spec:
   selector:
     app: pod-javadb-prod
 EOF
-
 cat <<EOF > Delivery_and_Deployment_Java_app/kubernetes/deployment_stage.yml
 apiVersion: v1
 kind: ConfigMap
@@ -115,10 +110,7 @@ spec:
   selector:
     matchLabels:
       app: pod-javadb-stage
-
- 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -177,10 +169,7 @@ spec:
   selector:
     matchLabels:
       app: pod-javadb-dev
-
- 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
