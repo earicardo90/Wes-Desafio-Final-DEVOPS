@@ -18,13 +18,13 @@ resource "aws_security_group" "mysql" {
     {
       cidr_blocks      = []
       description      = "Libera acesso dos workers para o mysql"
-      from_port        = 30000
+      from_port        = 3306
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       protocol         = "tcp"
       security_groups  = ["${var.sg_workers}"]
       self             = false
-      to_port          = 30002
+      to_port          = 3306
     },
     
   ]
