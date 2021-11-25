@@ -24,7 +24,8 @@
   environment:
     PASSWORD: "{{ lookup('env', 'PASSWORD') }}"
     DATABASE: "{{ lookup('env', 'DATABASE') }}"
-    USER: "{{ lookup('env', 'USER') }}"
+    ADMIN: "{{ lookup('env', 'ADMIN') }}"
+    JAVA: "{{ lookup('env', 'JAVA') }}"
 
   tasks:  
     - name: "Roda: sudo apt update"
@@ -56,10 +57,11 @@
     - name: "Criando senha root mysql"
       become: yes
       mysql_user:
-        name: "{{ lookup('env', 'USER') }}"
-        host: '%'
+        name: "{{ lookup('env', 'ADMIN') }}"
+        host: localhost
         password: "{{ lookup('env', 'PASSWORD') }}"
         priv: "*.*:ALL,GRANT"
+        state: present
 
     - name: "Copia mysqld.cnf para os servidores"
       copy:
@@ -70,18 +72,18 @@
     - name: "Cria o banco de dados MySQL"
       mysql_db:
         name: "{{ lookup('env', 'DATABASE') }}"
-        login_user: "{{ lookup('env', 'USER') }}"
+        login_user: "{{ lookup('env', 'ADMIN') }}"
         login_password: "{{ lookup('env', 'PASSWORD') }}"
         state: present
 
-    # - name: "Liberando acesso root externo"
-    #   become: yes
-    #   mysql_user:
-    #     name: "{{ lookup('env', 'USER') }}"
-    #     host: '%'
-    #     login_user: "{{ lookup('env', 'USER') }}"
-    #     login_password: "{{ lookup('env', 'PASSWORD') }}"
-    #     priv: "*.*:ALL,GRANT" 
+    - name: "Cria usuario com acesso externo"
+      become: yes
+      mysql_user:
+        name: "{{ lookup('env', 'JAVA') }}"
+        host: '%'
+        login_user: "{{ lookup('env', 'ADMIN') }}"
+        login_password: "{{ lookup('env', 'PASSWORD') }}"
+        priv: ".*:ALL,GRANT" 
 
     - name: "Restart mysql"
       become: yes
