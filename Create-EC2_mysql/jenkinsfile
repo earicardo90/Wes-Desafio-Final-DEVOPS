@@ -7,6 +7,9 @@ pipeline {
         string(name: 'subnet_priv_2', defaultValue: '', description: 'Digite os ID da segunda subnet privada')
         string(name: 'subnet_priv_3', defaultValue: '', description: 'Digite os ID da terceira subnet privada')
         string(name: 'sg_workers', defaultValue: '', description: 'Digite os ID do security group dos workes')
+        string(name: 'USER', defaultValue: '', description: 'Digite o usuario do banco de dados "root"')
+        string(name: 'PASSWORD', defaultValue: '', description: 'Digite a senha do banco de dados "Senha&12_torne00"')
+        string(name: 'DATABASE', defaultValue: '', description: 'Digite o nome da database "SpringWebYoutube"')
     } 
     stages {
         stage('Clone repo') {
