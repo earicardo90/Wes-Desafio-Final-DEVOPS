@@ -5,8 +5,8 @@ provider "aws" {
 resource "aws_instance" "dev_img_deploy_jenkins" {
   ami           = "ami-0e66f5495b4efdd0f"
   instance_type = "t2.large"
-  key_name      = "weslley_key"
-  subnet_id                   = "subnet-0341d478f8cd667a3"
+  key_name      = var.key_id
+  subnet_id                   = var.subnet_id
   associate_public_ip_address = true
   root_block_device {
     encrypted   = true
@@ -21,7 +21,7 @@ resource "aws_instance" "dev_img_deploy_jenkins" {
 resource "aws_security_group" "acesso_jenkins_dev_img" {
   name        = "wes_acesso_jenkins_dev_img"
   description = "acesso_jenkins_dev_img inbound traffic"
-  vpc_id      = "vpc-0050d085a3350c2c9"
+  vpc_id      = var.vpc_id
 
   ingress = [
     {

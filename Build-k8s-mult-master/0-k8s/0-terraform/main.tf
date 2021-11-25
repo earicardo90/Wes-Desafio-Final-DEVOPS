@@ -12,7 +12,7 @@ resource "aws_instance" "k8s_proxy" {
     aws_subnet.wes_sub_tf_public_0, aws_subnet.wes_sub_tf_public_1
   ]
   instance_type               = "t3.medium"
-  key_name                    = "weslley_key"
+  key_name                    = var.key_id
   subnet_id                   = element(local.subs, count.index)
   associate_public_ip_address = true
   count                       = 1
@@ -29,7 +29,7 @@ resource "aws_instance" "k8s_masters" {
     aws_subnet.wes_sub_tf_public_0, aws_subnet.wes_sub_tf_public_1, aws_instance.k8s_workers
   ]
   instance_type               = "t3.large"
-  key_name                    = "weslley_key"
+  key_name                    = var.key_id
   count                       = 3
   subnet_id                   = element(local.subs, count.index)
   associate_public_ip_address = true
@@ -45,7 +45,7 @@ resource "aws_instance" "k8s_workers" {
     aws_subnet.wes_sub_tf_public_0, aws_subnet.wes_sub_tf_public_1
   ]
   instance_type               = "t3.medium"
-  key_name                    = "weslley_key"
+  key_name                    = var.key_id
   count                       = 3
   subnet_id                   = element(local.subs, count.index)
   associate_public_ip_address = true

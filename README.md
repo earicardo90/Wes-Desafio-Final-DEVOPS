@@ -50,80 +50,29 @@ Plataformas e Tecnologias que utilizamos para desenvolver este projeto:
 
 - Ter acesso ao Jenkins onde serão executadas as Pipelines [Jenkins](http://18.230.108.101:8080/);
 - Ter acesso a console [AWS](https://console.aws.amazon.com/console/home?nc2=h_ct&src=header-signin);
-- Ter uma VPC com Internet Gataway criados e uma Kay pair.
+- Ter uma VPC com Internet Gataway criados e uma Key pair.
 > Obs: será necessário fornecer os IDs da VPC, Internet Gataway e Key Pair para as variaveis do terraform
 
-#### Criação da pipeline de infraestrutura para provisionar e guardar uma imagem**
+## Sida as etapas abaixo:
 
-- [Repositório](hhttps://github.com/weslleyfs/Wes-Desafio-Final-DEVOPS/tree/main/Build_AMI_AWS)
-  
-  Edite o arquivo "env_example" com as configurações do seu banco de dados:
+**1.** Faça o clone do repositorio para sua maquina;
 
-```
-DB_USER=seu_usuario
-DB_PASSWORD=sua_senha
-DB_HOST=seu_host
-DB_PORT=sua_port
-DB_NAME=nome_do_banco
-JWT_SECRET=seu_segredo
-```
+~~~~
+git clone https://github.com/weslleyfs/Wes-Desafio-Final-DEVOPS.git
+~~~~
 
-#### Criação da pipeline para provisionar um cluster Kubernetes multi master**
-- [Repositório](https://github.com/weslleyfs/Wes-Desafio-Final-DEVOPS/tree/main/Build-k8s-mult-master)
-  
-Edite o arquivo "env_example" com as configurações do seu banco de dados:
+**2.** Altere os arquivos de variaveis dentro de cada pasta terraform colocando os IDs da VPC, Internet Gataway e Key Pair;
 
-```
-DB_USER=seu_usuario
-DB_PASSWORD=sua_senha
-DB_HOST=seu_host
-DB_PORT=sua_port
-DB_NAME=nome_do_banco
-JWT_SECRET=seu_segredo
-```
+**3.** Acesse o [Jenkins](http://18.230.108.101:8080/) para iniciar a contrução das Pipelines;
+> **IMPORTANTE: A sequencia de criação e execução das Pipelines devem ser seguindas da seguinte forma:**
+> **1 Build_AMI_AWS**
+> **2 Build-k8s-mult-master**
+> **3 Create-EC2_mysql**
+> **4 Delivery_and_Deployment_Java_app**
+> **Pois os outputs de cada Pipeline serão necessários para construção da Pipeline seguinte.**
 
-#### Criação da pipeline para provisionar mysqls externos em redes isoladas (dev, stage, prod)**
-
-Edite o arquivo "env_example" com as configurações do seu banco de dados:
-
-```
-DB_USER=seu_usuario
-DB_PASSWORD=sua_senha
-DB_HOST=seu_host
-DB_PORT=sua_port
-DB_NAME=nome_do_banco
-JWT_SECRET=seu_segredo
-```
-
-#### Criação da pipeline de de desenvolvimento para deploy de uma aplicação Java nos ambientes (dev, stage, prod)**
-
-Edite o arquivo "env_example" com as configurações do seu banco de dados:
-```
-DB_USER=seu_usuario
-DB_PASSWORD=sua_senha
-DB_HOST=seu_host
-DB_PORT=sua_port
-DB_NAME=nome_do_banco
-JWT_SECRET=seu_segredo
-```
-
-## Funcionalidades
-
-Funcionalidades que o sistema oferece:
-
-- Cadastro e Login de Usuários
-- Cadastro de Clientes e Especialistas
-- Cadastro de Atendimentos e de Históricos de Prontuários
-- Pesquisa  
-- Busca de atendimentos por Status, Paciente, Especialista, Data de agendamento ou de atendimento
-- Criação de Agendamentos
-- Criptografia de senhas
-- Sistema de autenticação de usuário
-- Validação de requisições
-- Mensagens de erro customizadas *user friendly*
-- Documentação dos endpoints
-
-## Licença
-Este projeto está sob a licença de (PomaLabs).
-
-> Written with [StackEdit](https://stackedit.io/).
+* Logado no Jenkins selecione **New Item** > Digite um nome para sua Pipeline > Selecione a opção **Pipeline** > **OK**
+* Dentro de cada pasta do projeto existe o arquivo "jenkinsfile" que deve ser utilizado para construção das Pipelines, copie seu conteudo para o campo script > **SAVE**
+* Selecione a opção **Build Now** e após finalizar, atualize sua pagina e selecione a opção **Build with Parameters**
+* Digite os parametros necessários conforme descrição de cada etapa.
+ 

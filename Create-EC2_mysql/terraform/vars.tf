@@ -22,3 +22,9 @@ variable "vpc_id" {
   default = "vpc-0050d085a3350c2c9"
 
 }
+
+variable "key_id" {
+  type    = string
+  default = "weslley_key" # coloque o nome da sua Key Pair
+
+}
