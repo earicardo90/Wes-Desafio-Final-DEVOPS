@@ -51,7 +51,7 @@ Plataformas e Tecnologias que utilizamos para desenvolver este projeto:
 - Ter acesso ao Jenkins onde serão executadas as Pipelines [Jenkins](http://18.230.108.101:8080/);
 - Ter acesso a console [AWS](https://console.aws.amazon.com/console/home?nc2=h_ct&src=header-signin);
 - Ter uma VPC com Internet Gataway criados e uma Kay pair.
-> Obs: será necessário vornecer os IDs da VPC, Internet Gataway e Key Pair para as variaveis do terraform
+> Obs: será necessário fornecer os IDs da VPC, Internet Gataway e Key Pair para as variaveis do terraform
 
 #### Criação da pipeline de infraestrutura para provisionar e guardar uma imagem**
 
