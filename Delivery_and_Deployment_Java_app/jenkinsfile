@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'USER', defaultValue: '', description: 'Digite o usuario do banco de dados "root"')
+        string(name: 'USER', defaultValue: '', description: 'Digite o usuario ADM do banco de dados "root"')
+        string(name: 'JAVA', defaultValue: '', description: 'Digite o usuario do banco de dados "java"')
         string(name: 'PASSWORD', defaultValue: '', description: 'Digite a senha do banco de dados "Senha&12_torne00"')
         string(name: 'DATABASE', defaultValue: '', description: 'Digite o nome da database "SpringWebYoutube"')
         string(name: 'DATABASE_URL', defaultValue: '', description: 'Digite a URL da DATABASE "mysql://127.0.0.1:3306/treinamento_database"')
