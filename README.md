@@ -1,8 +1,4 @@
-<h1 align="center">
-<img src="https://i.imgur.com/nwfkVsb.png" title="Clínica Pomarola" />
-</h1>
-<h3 align="center">  
-Desafio Treinamento Devops
+# Desafio Treinamento Devops
 </h3>
 <p align="center">
   <a href="#sobre o projeto">Sobre o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -11,7 +7,7 @@ Desafio Treinamento Devops
   <a href="#funcionalidades">Funcionalidades</a>
 </p>
 
-##   Sobre o projeto
+## Sobre o projeto
 
 **Objetivo:** Exercitar os conhecimentos adquiridos do treinamento
 Meta:
@@ -23,7 +19,7 @@ Meta:
   
 Para ver o **Repositório do projeto**, clique aqui: [repo-desafio-final-devops](https://github.com/weslleyfs/Wes-Desafio-Final-Devops)</br>
 
-###   Desenvolvedores
+### Desenvolvedores
 
 - [Ricardo Bastos Natalino](https://github.com/)
 - [Ronaldo Yudi Endo](https://github.com/ryudik)
@@ -31,7 +27,7 @@ Para ver o **Repositório do projeto**, clique aqui: [repo-desafio-final
 - [Vinicius Faraco Gimenes](https://github.com/)
 - [Weslley Ferreira Dos Santos](https://github.com/weslleyfs)
 
-##   Tecnologias
+## Tecnologias
 
 Plataformas e Tecnologias que utilizamos para desenvolver este projeto:
 
@@ -46,15 +42,15 @@ Plataformas e Tecnologias que utilizamos para desenvolver este projeto:
 - [Mysql](https://www.mysql.com//)
 - [Java](https://www.java.com/)
 
-##   Descrição do Projeto
+## Descrição do Projeto
 
--  A seguir a descrição resumida das Pipelines e soluções adotadas em cada  parte do projeto.
+  - A seguir a descrição resumida das Pipelines e soluções adotadas em cada  parte do projeto.
   
-### Pré-requisitos
+### Pré-requisitos
 
 Configure um banco de dados [PostgreSQL](https://www.postgresql.org/) na sua máquina e crie um novo banco.
 
-#### Criação da pipeline de infraestrutura para provisionar e guardar uma imagem**
+#### Criação da pipeline de infraestrutura para provisionar e guardar uma imagem**
 
 - [Repositório](hhttps://github.com/weslleyfs/Wes-Desafio-Final-DEVOPS/tree/main/Build_AMI_AWS)
   
@@ -69,7 +65,7 @@ DB_NAME=nome_do_banco
 JWT_SECRET=seu_segredo
 ```
 
-#### Criação da pipeline para provisionar um cluster Kubernetes multi master**
+#### Criação da pipeline para provisionar um cluster Kubernetes multi master**
 - [Repositório](https://github.com/weslleyfs/Wes-Desafio-Final-DEVOPS/tree/main/Build-k8s-mult-master)
   
 Edite o arquivo "env_example" com as configurações do seu banco de dados:
@@ -83,7 +79,7 @@ DB_NAME=nome_do_banco
 JWT_SECRET=seu_segredo
 ```
 
-#### Criação da pipeline para provisionar mysqls externos em redes isoladas (dev, stage, prod)**
+#### Criação da pipeline para provisionar mysqls externos em redes isoladas (dev, stage, prod)**
 
 Edite o arquivo "env_example" com as configurações do seu banco de dados:
 
@@ -96,7 +92,7 @@ DB_NAME=nome_do_banco
 JWT_SECRET=seu_segredo
 ```
 
-####  Criação da pipeline de de desenvolvimento para deploy de uma aplicação Java nos ambientes (dev, stage, prod)**
+#### Criação da pipeline de de desenvolvimento para deploy de uma aplicação Java nos ambientes (dev, stage, prod)**
 
 Edite o arquivo "env_example" com as configurações do seu banco de dados:
 ```
@@ -124,7 +120,7 @@ Funcionalidades que o sistema oferece:
 - Mensagens de erro customizadas *user friendly*
 - Documentação dos endpoints
 
-##   Licença
+## Licença
 Este projeto está sob a licença de (PomaLabs).
 
 > Written with [StackEdit](https://stackedit.io/).
