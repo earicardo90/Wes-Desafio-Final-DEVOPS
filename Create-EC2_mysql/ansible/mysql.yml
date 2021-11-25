@@ -75,7 +75,6 @@
         host: "%"
         login_user: "root"
         login_password: "Senha&12_torne00"
-#        password: "Senha&12_torne00"
         priv: "*.*:ALL,GRANT"        
 
     - name: "Copia mysqld.cnf para os servidores"
@@ -83,6 +82,8 @@
         src: "mysqld.cnf"
         dest: "/etc/mysql/mysql.conf.d/mysqld.cnf"
       become: yes
+      notify:
+        - restart mysql      
 
     - name: "Cria o banco de dados MySQL"
       mysql_db:
@@ -91,11 +92,6 @@
         login_password: "Senha&12_torne00"
         state: present
     
-    - name: "Restart do mysql" 
-      become: yes
-      notify:
-        - restart mysql        
-
     - name: "Adicionar no bashrc"
       lineinfile: dest=~/.bashrc line="export USER='root'" state=present
      
